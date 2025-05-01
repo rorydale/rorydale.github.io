@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Point Break Radio · Early Glam Show</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@400;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --magenta: #FF2EB3;
+  --violet:  #8B3EEB;
+  --gold:    #FFC833;
+  --paper:   #F5F3EF;
+  --ink:     #12051A;
+  font-family: 'Inter', sans-serif;
+}
+/* reset */
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--paper);color:var(--ink);overflow-x:hidden}
+/* ★ HERO & PARALLAX LAYERS */
+/* Replace the fixed-mask with an absolute one INSIDE .hero */
+.hero {
+  position: relative;
+  height: 90vh;
+  overflow: hidden;
+}
+
+/* Parallax collage layer */
+.bg-collage {
+  position: fixed;
+  inset: 0;
+  background: url("./assets/6660CE2C-0F1E-41A6-A031-05F4B0F8C4E9.png") center/cover no-repeat;
+  transform: translateZ(-1px) scale(1.1);
+  z-index: 1;
+}
+
+/* MASK layer: uses our SVG slash-mask to carve holes */
+.mask {
+  position: absolute;
+  inset: 0;                      /* fill the hero */
+  background: var(--paper);      /* paper-white cover */
+  mask: url(#slash-mask);        /* apply our big slashes */
+  mask-mode: alpha;
+  -webkit-mask: url(#slash-mask);
+  -webkit-mask-composite: destination-out;
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* Sticky title bar */
+.title-bar {
+  position: sticky;
+  top: 0;
+  z-index: 3;
+  background: var(--magenta);
+  color: var(--gold);
+  padding: 2rem 1.5rem 1.2rem;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+.title-bar h1 {
+  margin:0;
+  font: 900 3.6rem/1 'Bebas Neue', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: .025em;
+}
+.title-bar p {
+  margin:.2rem 0 0;
+  font: 700 1.15rem/1 'Oswald', sans-serif;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+/* ★ PAGE CONTENT */
+main {
+  position: relative;
+  z-index: 2; /* above bg, but under marquee when it sticks */
+  max-width: 1000px;
+  margin: auto;
+  padding: 4rem 1.5rem 6rem;
+  line-height: 1.55;
+}
+main h2 {
+  font: 700 1.5rem/1 'Oswald',sans-serif;
+  text-transform: uppercase;
+  margin: 3rem 0 1rem;
+  color: var(--magenta);
+}
+
+/* ★ TRACK GRID */
+.tracklist ul {
+  display: grid;
+  gap: 1.6rem;
+  grid-template-columns: repeat(auto-fill,minmax(200px,1fr));
+  list-style: none;
+}
+.tracklist li {
+  background: #fff;
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 3px 8px #0002;
+  transition: transform .2s;
+}
+.tracklist li:hover { transform: translateY(-4px) }
+.tracklist figure {
+  margin: 0;
+  aspect-ratio: 1/1;
+  overflow: hidden;
+}
+.tracklist img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.tracklist .info {
+  padding: .8rem 1rem;
+}
+.track {
+  display: block;
+  font-weight: 700;
+}
+.artist {
+  display: block;
+  font-size: .83rem;
+  color: #555;
+}
+.genre {
+  display: inline-block;
+  margin-top: .35rem;
+  font-size: .72rem;
+  background: var(--magenta);
+  color: #fff;
+  padding: .15rem .55rem;
+  border-radius: 3px;
+}
+
+/* ★ FOOTER */
+footer {
+  background: var(--ink);
+  color: #ccc;
+  text-align: center;
+  padding: 2rem 1.5rem;
+}
+footer a { color: var(--magenta); text-decoration: none; }
+
+/* ★ RESPONSIVE TWEAKS */
+@media(max-width:600px){
+  .title-bar h1 { font-size:2.4rem }
+  .hero { height:80vh }
+}
+</style>
+</head>
+<body>
+
+  <header class="hero">
+    <!-- SVG mask with big slashes -->
+    <svg width="0" height="0" style="position:absolute">
+      <mask id="slash-mask" maskUnits="userSpaceOnUse">
+        <!-- full‐size white mask -->
+        <rect x="0" y="0" width="100%" height="100%" fill="white"/>
+  
+        <!-- enlarged left slash -->
+        <polygon
+          points="
+            0,0      /* top‐left corner */
+            350,0    /* 350px across top */
+            150,900  /* down 900px, inboard 150px */
+            0,900    /* straight down at left edge */
+          "
+          fill="black"
+        />
+  
+        <!-- enlarged right slash -->
+        <polygon
+          points="
+            650,0     /* start 650px across top */
+            1000,0    /* to right edge */
+            1000,900  /* down 900px at right edge */
+            550,900   /* back inboard 550px */
+          "
+          fill="black"
+        />
+      </mask>
+    </svg>
+  
+    <div class="bg-collage"></div>
+  
+    <!-- mask now “holes out” two fat diagonal slashes -->
+    <div class="mask"></div>
+  
+    <div class="title-bar">
+      <h1>The Early Glam Show</h1>
+      <p>DAY · TIME</p>
+    </div>
+  </header>
+
+<main>
+  <p><strong>We’re rewinding to 1974—when platform boots met leather jackets in the smoky backrooms of NYC, London, Toronto, and Melbourne.</strong>  
+  No radio hits—just under-the-radar riffs that lit the fuse for punk, metal, and every subversive genre since.</p>
+
+  <h2>Track Listing</h2>
+  <div class="tracklist">
+    <ul>
+      <li data-genre="glam rock">
+        <figure><img src="https://coverartarchive.org/release/bf6a8358-496d-476e-bb90-b15acd85ccb4/28709983912.jpg" alt="Kiss – Strutter"></figure>
+        <div class="info">
+          <span class="track">Strutter</span>
+          <span class="artist">Kiss · 1974</span>
+          <span class="genre">Glam Rock</span>
+        </div>
+      </li>
+      <li data-genre="heavy glam">
+        <figure><img src="https://coverartarchive.org/release/9950b4e4-7f16-4d2d-a294-7c6cd0df6aa0/26854069729.jpg" alt="The Sweet – Set Me Free"></figure>
+        <div class="info">
+          <span class="track">Set Me Free</span>
+          <span class="artist">The Sweet · 1974</span>
+          <span class="genre">Heavy Glam</span>
+        </div>
+      </li>
+      <li data-genre="proto-punk">
+        <figure><img src="https://coverartarchive.org/release/ca3b0bea-0bb2-4356-b149-34f8f0210553/17248932425.jpg" alt="New York Dolls – Babylon"></figure>
+        <div class="info">
+          <span class="track">Babylon</span>
+          <span class="artist">New York Dolls · 1974</span>
+          <span class="genre">Proto-Punk</span>
+        </div>
+      </li>
+      <li data-genre="sleaze rock">
+        <figure><img src="https://coverartarchive.org/release/5ba79aff-6d58-4e8e-9ad1-ea9575afda74/15190214518.jpg" alt="Alice Cooper – Muscle of Love"></figure>
+        <div class="info">
+          <span class="track">Muscle of Love</span>
+          <span class="artist">Alice Cooper · 1973</span>
+          <span class="genre">Sleaze Rock</span>
+        </div>
+      </li>
+      <!-- …repeat up to 26 items -->
+    </ul>
+  </div>
+
+  <h2>Show Notes</h2>
+  <p>Recorded live to tape on vintage UREI compressors, mixed through a Space Echo, and doused in glitter and cigarette ash.  
+  Replays on Mixcloud. Share the noise with <strong>#PointBreakRadio</strong>.</p>
+</main>
+
+<footer>
+  © 2025 Point Break Radio · Built with 🖤 ·
+  <a href="#">Instagram</a> · <a href="#">Mixcloud</a>
+</footer>
+
+</body>
+</html>

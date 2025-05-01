@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Point Break Radio · Early Glam Show</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@400;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+/* ===== brand palette ===== */
+:root{
+  --magenta:#FF2EB3;
+  --violet:#8B3EEB;
+  --gold:#FFC833;
+  --paper:#F5F3EF;
+  --ink:#12051A;
+  font-family:'Inter',sans-serif;
+}
+/* ===== reset ===== */
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);overflow-x:hidden}
+/* ===== hero / parallax ===== */
+.hero{height:92vh;overflow:hidden;position:relative}
+.bg-collage{
+  position:fixed;inset:0;
+  background:url("./assets/6660CE2C-0F1E-41A6-A031-05F4B0F8C4E9.png") center/cover no-repeat;
+  transform:translateZ(-1px) scale(1.1);      /* subtle depth */
+}
+.title-bar{
+  position:sticky;top:0;z-index:3;
+  background:var(--magenta);color:var(--gold);
+  padding:2rem 1.5rem 1.2rem;
+  box-shadow:0 4px 10px #0003;
+  backdrop-filter:blur(3px)
+}
+.show-title{margin:0;font:900 3.6rem/1 'Bebas Neue',sans-serif;letter-spacing:.025em}
+.show-meta{margin:.35rem 0 0;font:700 1.15rem/1 'Oswald',sans-serif;text-transform:uppercase;color:#fff}
+/* ===== main body ===== */
+.page{position:relative;z-index:2;max-width:1000px;margin:auto;padding:4rem 1.5rem 6rem}
+.page h2{font:700 1.55rem/1 'Oswald',sans-serif;text-transform:uppercase;margin:3rem 0 1.1rem;color:var(--magenta)}
+/* ===== tracklist ===== */
+.tracklist ul{display:grid;gap:1.6rem;list-style:none;margin:0;padding:0;
+              grid-template-columns:repeat(auto-fill,minmax(200px,1fr))}
+.tracklist li{background:#fff;border-radius:6px;overflow:hidden;
+              box-shadow:0 3px 8px #0002;transition:transform .2s}
+.tracklist li:hover{transform:translateY(-4px)}
+.tracklist figure{margin:0;aspect-ratio:1/1;overflow:hidden}
+.tracklist img{width:100%;height:100%;object-fit:cover}
+.info{padding:.85rem 1rem}
+.track{display:block;font-weight:700}
+.artist{display:block;font-size:.83rem;color:#555}
+.genre{display:inline-block;margin-top:.35rem;font-size:.72rem;
+       background:var(--magenta);color:#fff;padding:.18rem .55rem;border-radius:3px}
+/* ===== footer ===== */
+footer{background:var(--ink);color:#ccc;text-align:center;padding:2rem 1.5rem}
+footer a{color:var(--magenta);text-decoration:none}
+/* ===== simple responsive ===== */
+@media(max-width:600px){
+ .show-title{font-size:2.4rem}
+ .hero{height:80vh}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== HERO SECTION ===== -->
+<header class="hero">
+  <div class="bg-collage"></div>
+  <div class="title-bar">
+     <h1 class="show-title">The Early Glam Show</h1>
+     <p class="show-meta">DAY · TIME</p>
+  </div>
+</header>
+
+<!-- ===== PAGE CONTENT ===== -->
+<main class="page">
+  <p><strong>Tonight we time-warp to ’74, when glitter met gutter on the fastest freight train rock had ever seen.</strong>  
+  Twenty-six underground cuts — no chart-toppers, just raw stomp and stacked-heel swagger.</p>
+
+  <!-- === TRACK GRID === -->
+  <h2>Track Listing</h2>
+  <div class="tracklist">
+    <ul>
+      <!-- You’ll replace these <li> via PHP/JS/API -->
+      <li>
+        <figure><img src="https://coverartarchive.org/release/bf6a8358-496d-476e-bb90-b15acd85ccb4/28709983912.jpg" alt=""></figure>
+        <div class="info">
+          <span class="track">Strutter</span>
+          <span class="artist">Kiss · 1974</span>
+          <span class="genre">Glam Rock</span>
+        </div>
+      </li>
+      <li>
+        <figure><img src="https://coverartarchive.org/release/9950b4e4-7f16-4d2d-a294-7c6cd0df6aa0/26854069729.jpg" alt=""></figure>
+        <div class="info">
+          <span class="track">Set Me Free</span>
+          <span class="artist">The Sweet · 1974</span>
+          <span class="genre">Heavy Glam</span>
+        </div>
+      </li>
+      <li>
+        <figure><img src="https://coverartarchive.org/release/ca3b0bea-0bb2-4356-b149-34f8f0210553/17248932425.jpg" alt=""></figure>
+        <div class="info">
+          <span class="track">Babylon</span>
+          <span class="artist">New York Dolls · 1974</span>
+          <span class="genre">Proto-Punk</span>
+        </div>
+      </li>
+      <li>
+        <figure><img src="https://coverartarchive.org/release/5ba79aff-6d58-4e8e-9ad1-ea9575afda74/15190214518.jpg" alt=""></figure>
+        <div class="info">
+          <span class="track">Muscle of Love</span>
+          <span class="artist">Alice Cooper · 1973</span>
+          <span class="genre">Sleaze Rock</span>
+        </div>
+      </li>
+      <!-- duplicate until 26 tracks -->
+    </ul>
+  </div>
+
+  <h2>Show Notes</h2>
+  <p>Recorded live to tape on a pair of ’72 UREI 1176s, mixed through a Space Echo and sprinkled with equal parts glitter dust and cigarette ash.  
+  Catch replays on Mixcloud, and share the ride with <strong>#PointBreakRadio</strong>.</p>
+</main>
+
+<footer>
+  © 2025 Point Break Radio · Built with 🖤 ·
+  <a href="#">Instagram</a> · <a href="#">Mixcloud</a>
+</footer>
+
+</body>
+</html>
