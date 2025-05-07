@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Point Break Radio - Show Profile</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Helvetica+Neue&display=swap');
+
+        body {
+            background: linear-gradient(135deg, #f0f4f8, #d9e2ec); /* Soft, modern gradient background */
+            font-family: 'Helvetica Neue', -apple-system, BlinkMacSystemFont, sans-serif;
+            margin: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: auto;
+        }
+        #profile-container {
+            width: 900px;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        #header {
+            background: linear-gradient(90deg, #8a2be2, #ff69b4); /* Your Purple/Pink gradient */
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+        #logo {
+            width: 200px; /* Adjust based on your logo's dimensions */
+            height: auto;
+            margin-bottom: 10px;
+        }
+        #header h1 {
+            margin: 0;
+            font-size: 24px;
+            font-weight: 600;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        #content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+        .section {
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            padding: 16px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .section:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        .section h2 {
+            margin: 0 0 12px;
+            font-size: 18px;
+            font-weight: 600;
+            color: #1a1a1a;
+            background: linear-gradient(90deg, #8a2be2, #ff69b4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-align: center;
+        }
+        #about p {
+            margin: 0;
+            font-size: 14px;
+            color: #555;
+            line-height: 1.5;
+        }
+        #top-8 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+        }
+        .track {
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 6px;
+            padding: 10px;
+            font-size: 13px;
+            color: #333;
+            text-align: center;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+        }
+        #photos {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: 10px;
+        }
+        .album-cover {
+            width: 100px;
+            height: 100px;
+            background: #ddd;
+            border-radius: 6px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            color: #666;
+            text-align: center;
+        }
+        #mood {
+            text-align: center;
+        }
+        #mood p {
+            margin: 0;
+            font-size: 14px;
+            color: #555;
+        }
+        #mood p span {
+            font-size: 20px;
+        }
+        #poke-section {
+            text-align: center;
+            padding: 16px;
+        }
+        #poke-btn {
+            padding: 10px 20px;
+            background: linear-gradient(90deg, #8a2be2, #ff69b4);
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        #poke-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+        #poke-count {
+            margin-top: 10px;
+            font-size: 14px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div id="profile-container">
+        <div id="header">
+            <!-- Replace the gradient div with your actual logo image -->
+            <div style="background: linear-gradient(90deg, #8a2be2, #ff69b4); width: 200px; height: 60px; margin: 0 auto 10px; border-radius: 5px;"></div>
+            <!-- <img id="logo" src="path/to/your-logo.png" alt="Point Break Radio Logo"> -->
+            <h1 id="show-title"></h1>
+        </div>
+        <div id="content">
+            <div class="section" id="about">
+                <h2>About the Show</h2>
+                <p id="show-description"></p>
+            </div>
+            <div class="section" id="top-8">
+                <h2>Top 8 Tracks</h2>
+                <div id="track-list"></div>
+            </div>
+            <div class="section" id="photos">
+                <h2>Photos (Album Covers)</h2>
+                <div id="album-covers"></div>
+            </div>
+            <div class="section" id="mood">
+                <h2>Current Mood</h2>
+                <p>Groovin' to the 70s vibes! 🎸</p>
+            </div>
+            <div class="section" id="poke-section">
+                <h2>Poke This Show!</h2>
+                <button id="poke-btn">Poke</button>
+                <div id="poke-count">Pokes: 0</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Sample show data (using the first show from your archive)
+        const show = {
+            "date": "2023-12-14",
+            "title": "the 1970s female rock, pop, funk soul show",
+            "description": "Thursday, December 14th, 2023 - the 1970s female rock, pop, funk soul show! This playlist has been burning a hole in my pocket for the last few months, inspired by a vinyl night listening to Linda Ronstadt – I had to stop the album to start programming the show! There's something about this era of recording that checks all the boxes for me. Thanks for listening!",
+            "tracks": [
+                {"title": "You're No Good", "artist": "Linda Ronstadt", "album": "Heart Like a Wheel", "year": 1974, "genre": "Rock"},
+                {"title": "Superstition", "artist": "Stevie Wonder", "album": "Talking Book", "year": 1972, "genre": "Funk Soul"},
+                {"title": "Dreams", "artist": "Fleetwood Mac", "album": "Rumours", "year": 1977, "genre": "Rock"},
+                {"title": "Me and Bobby McGee", "artist": "Janis Joplin", "album": "Pearl", "year": 1971, "genre": "Rock"},
+                {"title": "Nutbush City Limits", "artist": "Ike & Tina Turner", "album": "Nutbush City Limits", "year": 1973, "genre": "Funk Soul"},
+                {"title": "Rhiannon", "artist": "Fleetwood Mac", "album": "Fleetwood Mac", "year": 1975, "genre": "Rock"},
+                {"title": "Piece of My Heart", "artist": "Big Brother & The Holding Company", "album": "Cheap Thrills", "year": 1968, "genre": "Rock"},
+                {"title": "Respect", "artist": "Aretha Franklin", "album": "I Never Loved a Man the Way I Love You", "year": 1967, "genre": "Soul"}
+            ]
+        };
+
+        // Populate show details
+        document.getElementById('show-title').textContent = `${show.date} - ${show.title}`;
+        document.getElementById('show-description').textContent = show.description;
+
+        // Populate Top 8 Tracks
+        const trackList = document.getElementById('track-list');
+        show.tracks.slice(0, 8).forEach(track => {
+            const trackDiv = document.createElement('div');
+            trackDiv.className = 'track';
+            trackDiv.textContent = `${track.artist} - ${track.title} (${track.year})`;
+            trackList.appendChild(trackDiv);
+        });
+
+        // Populate Photos (Album Covers) - Mocked as placeholders
+        const albumCovers = document.getElementById('album-covers');
+        show.tracks.slice(0, 5).forEach(track => {
+            const coverDiv = document.createElement('div');
+            coverDiv.className = 'album-cover';
+            coverDiv.textContent = `${track.album}`;
+            albumCovers.appendChild(coverDiv);
+        });
+
+        // Poke functionality
+        const pokeBtn = document.getElementById('poke-btn');
+        const pokeCount = document.getElementById('poke-count');
+        let pokes = localStorage.getItem('pokes') ? parseInt(localStorage.getItem('pokes')) : 0;
+        pokeCount.textContent = `Pokes: ${pokes}`;
+
+        pokeBtn.addEventListener('click', () => {
+            pokes++;
+            localStorage.setItem('pokes', pokes);
+            pokeCount.textContent = `Pokes: ${pokes}`;
+        });
+    </script>
+</body>
+</html>

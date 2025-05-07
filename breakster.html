@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Point Break Radio - Archive Search</title>
+    <style>
+        body {
+            background: linear-gradient(135deg, #f0f4f8, #d9e2ec); /* Soft, modern gradient background */
+            font-family: 'Helvetica Neue', -apple-system, BlinkMacSystemFont, sans-serif;
+            margin: 40px auto; /* Center horizontally with auto margins */
+            display: flex;
+            justify-content: center; /* Center horizontally */
+            /* Removed align-items: center and min-height: 100vh to pin to top */
+        }
+        #app-window {
+            width: 900px;
+            background: rgba(255, 255, 255, 0.9); /* Glass-like transparency */
+            backdrop-filter: blur(10px); /* Frosted glass effect */
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        #title-bar {
+            background: linear-gradient(0deg, rgba(59, 78, 221, 1) 0%, rgba(211, 40, 211, 1) 80%, rgba(247, 6, 205, 1) 100%); /* Your gradient */
+            color: #fff;
+            padding: 8px 12px;
+            font-size: 16px;
+            font-weight: 500;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+        #traffic-lights {
+            display: flex;
+            gap: 8px;
+        }
+        .traffic-light {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            border: 1px solid rgba(0, 0, 0, 0.2);
+            box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.5), 0 1px 2px rgba(0, 0, 0, 0.2);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            cursor: pointer;
+        }
+        .traffic-light:hover {
+            transform: scale(1.1);
+            box-shadow: inset 0 1px 3px rgba(255, 255, 255, 0.7), 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        #close { background: #ff5f57; }
+        #minimize { background: #ffbd2e; }
+        #maximize { background: #00cc44; }
+        #search-pane {
+            padding: 12px;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(240, 240, 240, 0.95));
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        #search-input {
+            width: 100%;
+            padding: 10px 16px;
+            background: rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+            font-size: 14px;
+            color: #333;
+            transition: box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+        #search-input:focus {
+            outline: none;
+            border-color: #8a2be2;
+            box-shadow: 0 0 0 3px rgba(138, 43, 226, 0.1);
+        }
+        #results-body {
+            padding: 16px;
+            background: transparent;
+            max-height: 600px;
+            min-height: 400px; /* Ensure consistent height to prevent hopping */
+            overflow-y: auto;
+        }
+        .show-result {
+            margin-bottom: 20px;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .show-result:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        .show-result h3 {
+            margin: 0 0 6px;
+            font-size: 16px;
+            font-weight: 600;
+            color: #1a1a1a;
+        }
+        .show-result p {
+            margin: 0 0 8px;
+            font-size: 13px;
+            color: #555;
+            line-height: 1.5;
+        }
+        .track-preview {
+            font-size: 12px;
+            color: #333;
+            line-height: 1.4;
+        }
+        .expand-btn {
+            padding: 6px 12px;
+            background: linear-gradient(0deg, rgba(59, 78, 221, 1) 0%, rgba(211, 40, 211, 1) 80%, rgba(247, 6, 205, 1) 100%); /* Your gradient */
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 500;
+            cursor: pointer;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .expand-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+    </style>
+</head>
+<body>
+    <div id="app-window">
+        <div id="title-bar">
+            <div id="traffic-lights">
+                <div class="traffic-light" id="close"></div>
+                <div class="traffic-light" id="minimize"></div>
+                <div class="traffic-light" id="maximize"></div>
+            </div>
+            <span>Point Break Radio - Archive Search</span>
+            <div style="width: 40px;"></div>
+        </div>
+        <div id="search-pane">
+            <input type="text" id="search-input" placeholder="Search by title, artist, year, album, genre...">
+        </div>
+        <div id="results-body"></div>
+    </div>
+
+    <script>
+        const shows = [
+            {
+                "date": "2023-12-14",
+                "title": "the 1970s female rock, pop, funk soul show",
+                "description": "Thursday, December 14th, 2023 - the 1970s female rock, pop, funk soul show! This playlist has been burning a hole in my pocket for the last few months, inspired by a vinyl night listening to Linda Ronstadt – I had to stop the album to start programming the show! There's something about this era of recording that checks all the boxes for me. Thanks for listening!",
+                "tracks": [
+                    {"title": "You're No Good", "artist": "Linda Ronstadt", "album": "Heart Like a Wheel", "year": 1974, "genre": "Rock"},
+                    {"title": "Superstition", "artist": "Stevie Wonder", "album": "Talking Book", "year": 1972, "genre": "Funk Soul"},
+                    {"title": "Dreams", "artist": "Fleetwood Mac", "album": "Rumours", "year": 1977, "genre": "Rock"},
+                    {"title": "Me and Bobby McGee", "artist": "Janis Joplin", "album": "Pearl", "year": 1971, "genre": "Rock"},
+                    {"title": "Nutbush City Limits", "artist": "Ike & Tina Turner", "album": "Nutbush City Limits", "year": 1973, "genre": "Funk Soul"}
+                ]
+            },
+            {
+                "date": "2023-06-11",
+                "title": "the hanging out in 1983 show",
+                "description": "Sunday, June 11th, 2023 - the hanging out in 1983 show! Let's hang out in 1983 today and take a ride on the radio dial, pulling up pop, new wave, indie pop, folk-rock, rock, post-punk, and even a sprinkling of rap and metal!",
+                "tracks": [
+                    {"title": "Sweet Dreams (Are Made of This)", "artist": "Eurythmics", "album": "Sweet Dreams", "year": 1983, "genre": "New Wave"},
+                    {"title": "Billie Jean", "artist": "Michael Jackson", "album": "Thriller", "year": 1982, "genre": "Pop"},
+                    {"title": "Every Breath You Take", "artist": "The Police", "album": "Synchronicity", "year": 1983, "genre": "Rock"},
+                    {"title": "Blue Monday", "artist": "New Order", "album": "Power, Corruption & Lies", "year": 1983, "genre": "Post-Punk"},
+                    {"title": "Master of Puppets", "artist": "Metallica", "album": "Master of Puppets", "year": 1986, "genre": "Metal"}
+                ]
+            },
+            {
+                "date": "2023-06-04",
+                "title": "the Guardian's of the Galaxy nine year old's birthday show",
+                "description": "Sunday, June 4th, 2023 - the Guardian's of the Galaxy nine year old's birthday show! Our friend Wilf is nine years old today, and he loves Guardians of the Galaxy, Rollercoasters, and non-stop-dancing. Today's show takes a healthy dose of tracks from the three movies' mixtapes, and weaves in some Point Break picks to expand the vibe. This is a beer in the back garden BBQ playlist, so get your grills going and remember to stretch, because this one is a dancer! Happy Birthday Wilf!",
+                "tracks": [
+                    {"title": "Hooked on a Feeling", "artist": "Blue Swede", "album": "Hooked on a Feeling", "year": 1974, "genre": "Pop Rock"},
+                    {"title": "Come and Get Your Love", "artist": "Redbone", "album": "Wovoka", "year": 1974, "genre": "Funk Rock"},
+                    {"title": "Sweet Child o' Mine", "artist": "Guns N' Roses", "album": "Appetite for Destruction", "year": 1987, "genre": "Rock"},
+                    {"title": "Ain't No Mountain High Enough", "artist": "Marvin Gaye & Tammi Terrell", "album": "United", "year": 1967, "genre": "Soul"},
+                    {"title": "Mr. Blue Sky", "artist": "Electric Light Orchestra", "album": "Out of the Blue", "year": 1977, "genre": "Rock"}
+                ]
+            },
+            {
+                "date": "2023-06-03",
+                "title": "the mid to late 60s blues rock, R&B show",
+                "description": "Saturday, June 3rd, 2023 - the mid to late 60s blues rock, R&B show! Today’s show is inspired by The Spencer Davis Group’s cover of Nobody Knows You When You’re Down And Out, originally written by Jimmie Cox in 1923 - yes, that’s 100 years ago 😲! Steve Winwood was 18 years old when he recorded this track, which is almost incomprehensible when you hear his voice. What an amazing time in music. Let’s have a listen shall we?",
+                "tracks": [
+                    {"title": "Nobody Knows You When You're Down and Out", "artist": "The Spencer Davis Group", "album": "Autumn '66", "year": 1966, "genre": "Blues Rock"},
+                    {"title": "Crossroads", "artist": "Cream", "album": "Wheels of Fire", "year": 1968, "genre": "Blues Rock"},
+                    {"title": "Respect", "artist": "Aretha Franklin", "album": "I Never Loved a Man the Way I Love You", "year": 1967, "genre": "R&B"},
+                    {"title": "The Weight", "artist": "The Band", "album": "Music from Big Pink", "year": 1968, "genre": "Roots Rock"},
+                    {"title": "Gimme Some Lovin'", "artist": "The Spencer Davis Group", "album": "Gimme Some Lovin'", "year": 1966, "genre": "R&B"}
+                ]
+            },
+            {
+                "date": "2022-11-18",
+                "title": "the new wave, synth pop, industrial, alternative show",
+                "description": "Friday, November 18th, 2022 - the new wave, synth pop, industrial, alternative show! It's finally Friday and this playlist has been brewing for a couple of weeks. I listened to Tears for Fears' Songs from the Big Chair loud on vinyl recently and it inspired a deep dive for some of the darker new wave, synth-pop, alternative sounds that were around in the mid-80s. Thumping bass lines, thundering drums, sinister synths, and oh-so 80s vocals. This is the mood!",
+                "tracks": [
+                    {"title": "Shout", "artist": "Tears for Fears", "album": "Songs from the Big Chair", "year": 1985, "genre": "Synth Pop"},
+                    {"title": "Love Will Tear Us Apart", "artist": "Joy Division", "album": "Substance", "year": 1980, "genre": "Post-Punk"},
+                    {"title": "Blue Monday", "artist": "New Order", "album": "Power, Corruption & Lies", "year": 1983, "genre": "Synth Pop"},
+                    {"title": "Head Like a Hole", "artist": "Nine Inch Nails", "album": "Pretty Hate Machine", "year": 1989, "genre": "Industrial"},
+                    {"title": "Just Like Heaven", "artist": "The Cure", "album": "Kiss Me, Kiss Me, Kiss Me", "year": 1987, "genre": "Alternative"}
+                ]
+            }
+        ];
+
+        const searchInput = document.getElementById('search-input');
+        const resultsBody = document.getElementById('results-body');
+
+        function renderResults(filteredShows) {
+            resultsBody.innerHTML = '';
+            filteredShows.forEach(show => {
+                const div = document.createElement('div');
+                div.className = 'show-result';
+                div.innerHTML = `
+                    <h3>${show.date} - ${show.title}</h3>
+                    <p>${show.description.substring(0, 100)}...</p>
+                    <div class="track-preview">Tracks: ${show.tracks.slice(0, 3).map(t => `${t.artist} - ${t.title}`).join(', ')}...</div>
+                    <button class="expand-btn">Show All Tracks</button>
+                `;
+                div.querySelector('.expand-btn').addEventListener('click', () => {
+                    div.querySelector('.track-preview').innerHTML = `Tracks: ${show.tracks.map(t => `${t.artist} - ${t.title} (${t.year})`).join(', ')}`;
+                });
+                resultsBody.appendChild(div);
+            });
+        }
+
+        function searchShows() {
+            const query = searchInput.value.toLowerCase().trim();
+            if (!query) {
+                renderResults(shows);
+                return;
+            }
+
+            const filteredShows = shows.map(show => {
+                let relevance = 0;
+
+                // Check show title and description
+                if (show.title.toLowerCase().includes(query)) relevance += 3;
+                if (show.description.toLowerCase().includes(query)) relevance += 2;
+
+                // Check tracks for matches in year, artist, album, and genre
+                show.tracks.forEach(track => {
+                    if (track.year.toString() === query) relevance += 1;
+                    if (track.artist.toLowerCase().includes(query)) relevance += 1;
+                    if (track.album.toLowerCase().includes(query)) relevance += 1;
+                    if (track.genre.toLowerCase().includes(query)) relevance += 1;
+                });
+
+                return { ...show, relevance };
+            })
+            .filter(show => show.relevance > 0)
+            .sort((a, b) => b.relevance - a.relevance);
+
+            renderResults(filteredShows);
+        }
+
+        // Initial render
+        renderResults(shows);
+
+        // Search on input
+        searchInput.addEventListener('input', searchShows);
+    </script>
+</body>
+</html>
