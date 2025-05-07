@@ -12,119 +12,174 @@
       --paper:   #F5F3EF;
       --ink:     #12051A;
       --banner-h: 7.05rem; /* 112.8px */
-      font-family: 'Inter',sans-serif;
+      font-family: 'Inter', sans-serif;
     }
-    * { box-sizing:border-box; margin:0; padding:0 }
-    body { background:var(--paper); color:var(--ink); }
-
-    /* ——————————— SHOW BANNER ——————————— */
+  
+    /* ——— RESET & BASE STYLES ——— */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--paper); color: var(--ink); }
+  
+    /* ——— FIXED SHOW BANNER ——— */
     .show-banner {
-      position:fixed; top:0; left:0; right:0;
-      height:var(--banner-h);
-      background:var(--magenta);
-      color:var(--gold);
-      display:flex; flex-direction:column;
-      align-items:center; justify-content:center;
-      text-align:center; z-index:10;
-      box-shadow:0 2px 6px rgba(0,0,0,0.3);
+      position: fixed; top: 0; left: 0; right: 0;
+      height: var(--banner-h);
+      background: var(--magenta); color: var(--gold);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center; z-index: 10;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
     }
     .show-banner h1 {
-      font:900 2.8rem/1 'Bebas Neue',sans-serif;
-      text-transform:uppercase; letter-spacing:.02em;
-      margin-bottom:.25rem;
+      font: 900 2.8rem/1 'Bebas Neue', sans-serif;
+      text-transform: uppercase; letter-spacing: .02em;
+      margin-bottom: .25rem;
     }
     .show-banner p {
-      font:700 1rem/1 'Oswald',sans-serif;
-      text-transform:uppercase; margin:0;
+      font: 700 1rem/1 'Oswald', sans-serif;
+      text-transform: uppercase;
     }
-
-    /* ——————————— HERO (PARALLAX) ——————————— */
+  
+    /* ——— HERO SECTION ——— */
     .hero {
-      position:relative;
-      margin-top:var(--banner-h);
-      height:calc(90vh - var(--banner-h));
+      position: relative;
+      margin-top: var(--banner-h);
+      height: calc(90vh - var(--banner-h));
       background: url("./assets/6660CE2C-0F1E-41A6-A031-05F4B0F8C4E9.png")
                   center top / cover no-repeat var(--paper);
     }
-    .bg-collage { /* we’ll shift via JS */ }
-
-    /* lyric quote “knock-out” */
+  
     .lyric-quote {
-      position: absolute;
-      top: 50%; left: 50%;
+      position: absolute; top: 50%; left: 50%;
       transform: translate(-50%, -50%);
       width: min(90%, 1000px);
       padding: 0 1rem;
       text-align: center;
       white-space: normal;
       font: 900 clamp(6rem, 12vw, 10rem)/1 'Bebas Neue', sans-serif;
-      color: var(--paper);
-      z-index: 5;
-
-      /* primary coloured pop-shadow + softer depth shadow */
+      color: var(--paper); z-index: 5;
       text-shadow:
-        3px  4px  0px   color(srgb 0.723 0.1953 0.5207),
-        5px  7px 12px   rgba(112,29,121,0.34);
+        3px 4px 0px color(srgb 0.723 0.1953 0.5207),
+        5px 7px 12px rgba(112,29,121,0.34);
     }
-
-    /* ——————————— MAIN CONTENT ——————————— */
+  
+    /* ——— MAIN CONTENT ——— */
     main {
-      max-width:1000px; margin:auto;
-      padding:2rem 1rem 6rem; line-height:1.6;
+      max-width: 1000px; margin: auto;
+      padding: 2rem 1rem 6rem; line-height: 1.6;
     }
     main h2 {
-      margin-top:2.5rem;
-      font:700 1.5rem/1 'Oswald',sans-serif;
-      text-transform:uppercase; color:var(--magenta);
-    }
+      margin: 2.5rem 0 1rem 0;
+      font: 700 1.5rem/1 'Oswald', sans-serif;
+      text-transform: uppercase; color: var(--magenta);
+    }    
 
-    /* ——————————— TRACK GRID ——————————— */
+  
+    /* ——— TRACKLIST GRID ——— */
     .tracklist ul {
-      display:grid;
-      grid-template-columns:repeat(auto-fill,minmax(180px,1fr));
-      gap:1.6rem;
-      list-style:none;
-      margin:1rem 0 0;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 1.6rem; list-style: none; margin-top: 1rem;
     }
     .tracklist li {
-      background:#fff;
-      border-radius:6px;
-      overflow:hidden;
-      box-shadow:0 2px 8px rgba(0,0,0,0.1);
-      transition:transform .2s;
+      background: #fff; border-radius: 6px; overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      transition: transform .2s;
     }
     .tracklist li:hover {
-      transform:translateY(-4px);
+      transform: translateY(-4px);
     }
     .tracklist figure {
-      margin:0; aspect-ratio:1/1; overflow:hidden;
+      margin: 0; aspect-ratio: 1 / 1; overflow: hidden;
     }
     .tracklist img {
-      width:100%; height:100%; object-fit:cover;
+      width: 100%; height: 100%; object-fit: cover;
     }
     .info {
-      padding:.75rem 1rem;
+      padding: .75rem 1rem;
     }
     .track {
-      display:block; font-weight:700; font-size:1rem;
+      display: block; font-weight: 700; font-size: 1rem;
     }
     .artist {
-      display:block; font-size:.85rem; color:#555;
+      display: block; font-size: .85rem; color: #555;
     }
     .genre {
-      display:inline-block; margin-top:.35rem;
-      font-size:.75rem; background:var(--magenta);
-      color:#fff; padding:.2rem .5rem; border-radius:3px;
+      display: inline-block; margin-top: .35rem;
+      font-size: .75rem; background: var(--magenta);
+      color: #fff; padding: .2rem .5rem; border-radius: 3px;
     }
-
-    /* ——————————— FOOTER ——————————— */
+  
+    /* ——— FOOTER ——— */
     footer {
-      text-align:center; padding:3rem 1rem; font-size:.9rem;
-      color:#777;
+      text-align: center; padding: 3rem 1rem; font-size: .9rem;
+      color: #777;
     }
     footer a {
-      color:var(--ink); text-decoration:none; margin:0 .5rem;
+      color: var(--ink); text-decoration: none; margin: 0 .5rem;
     }
+  
+    /* ——————————————————————————————— */
+    /* ——— MEDIA QUERIES BELOW ——— */
+    /* ——————————————————————————————— */
+  
+    /* Small Devices: Mobile Portrait */
+    @media (max-width: 600px) {
+  
+      .hero {
+        height: calc(50vh - var(--banner-h));
+      }
+  
+      .lyric-quote {
+        top: 60%;
+        font-size: clamp(3rem, 10vw, 5rem);
+        line-height: 1.1;
+        text-shadow:
+          2px 3px 0px color(srgb 0.723 0.1953 0.5207),
+          4px 6px 10px rgba(112,29,121,0.34);
+      }
+  
+      .tracklist ul {
+        grid-template-columns: repeat(2, 1fr);
+      }
+  
+      .tracklist li {
+        font-size: 0.85rem;
+      }
+  
+      .tracklist .track {
+        font-size: 0.95rem;
+      }
+  
+      .tracklist .artist {
+        font-size: 0.75rem;
+      }
+  
+      .tracklist .genre {
+        font-size: 0.7rem;
+        padding: 0.15rem 0.4rem;
+      }
+    }
+  
+    /* Medium Devices: Tablets and iPad landscape */
+    @media (min-width: 768px) and (max-width: 1024px) {
+      
+      .hero {
+        height: calc(65vh - var(--banner-h));
+      }
+      
+      .lyric-quote {
+        top: 55%;
+        font-size: clamp(5rem, 10vw, 7rem);
+      }
+    }
+  
+    /* Optional: Large Desktop Enhancements */
+    @media (min-width: 1280px) {
+      .lyric-quote {
+        font-size: clamp(8rem, 10vw, 12rem);
+      }
+    }
+  
   </style>
 </head>
 <body>
@@ -148,85 +203,110 @@
     <h2>Track Listing</h2>
     <div class="tracklist">
       <ul>
-        <li><figure><img src="https://via.placeholder.com/200?text=Cover" alt=""></figure>
-            <div class="info"><span class="track">Strutter</span><span class="artist">Kiss · 1974</span><span class="genre">Glam Rock</span></div>
-        </li>
-        <li><figure><img src="https://via.placeholder.com/200?text=Cover" alt=""></figure>
-            <div class="info"><span class="track">Set Me Free</span><span class="artist">The Sweet · 1974</span><span class="genre">Heavy Glam</span></div>
-        </li>
-        <li><figure><img src="https://via.placeholder.com/200?text=Cover" alt=""></figure>
-            <div class="info"><span class="track">Sunken Rags</span><span class="artist">T. Rex · 1972</span><span class="genre">Glam Rock</span></div>
-        </li>
-        <li><figure><img src="https://via.placeholder.com/200?text=Cover" alt=""></figure>
-            <div class="info"><span class="track">Them Kinda Monkeys Can’t Swing</span><span class="artist">Slade · 1974</span><span class="genre">Glam Rock</span></div>
-        </li>
-        <li><figure><img src="https://via.placeholder.com/200?text=Cover" alt=""></figure>
-            <div class="info"><span class="track">Glycerine Queen</span><span class="artist">Suzi Quatro · 1973</span><span class="genre">Glam Rock</span></div>
-        </li>
-        <li><figure><img src="https://via.placeholder.com/200?text=Cover" alt=""></figure>
-            <div class="info"><span class="track">Babylon</span><span class="artist">New York Dolls · 1974</span><span class="genre">Proto-Punk</span></div>
-        </li>
-        <li><figure><img src="https://via.placeholder.com/200?text=Cover" alt=""></figure>
-            <div class="info"><span class="track">Muscle of Love</span><span class="artist">Alice Cooper · 1973</span><span class="genre">Sleaze Rock</span></div>
-        </li>
-        <li><figure><img src="https://via.placeholder.com/200?text=Cover" alt=""></figure>
-            <div class="info"><span class="track">The Faith Healer</span><span class="artist">Sensational Alex Harvey Band · 1973</span><span class="genre">Theatrical Rock</span></div>
-        </li>
-        <li><figure><img src="https://via.placeholder.com/200?text=Cover" alt=""></figure>
-            <div class="info"><span class="track">Search and Destroy</span><span class="artist">The Stooges · 1973</span><span class="genre">Proto-Punk</span></div>
-        </li>
-        <li><figure><img src="https://via.placeholder.com/200?text=Cover" alt=""></figure>
-            <div class="info"><span class="track">Sick on You</span><span class="artist">Hollywood Brats · 1973</span><span class="genre">Proto-Punk</span></div>
-        </li>
-        <li><figure><img src="https://via.placeholder.com/200?text=Cover" alt=""></figure>
-            <div class="info"><span class="track">Kings of the Party</span><span class="artist">Brownsville Station · 1974</span><span class="genre">Party Rock</span></div>
-        </li>
-        <li><figure><img src="https://via.placeholder.com/200?text=Cover" alt=""></figure>
-            <div class="info"><span class="track">Crash Street Kidds</span><span class="artist">Mott the Hoople · 1974</span><span class="genre">Sleaze Rock</span></div>
-        </li>
-        <li><figure><img src="https://via.placeholder.com/200?text=Cover" alt=""></figure>
-            <div class="info"><span class="track">Rock Candy</span><span class="artist">Montrose · 1973</span><span class="genre">Hard Rock</span></div>
-        </li>
-        <li><figure><img src="https://via.placeholder.com/200?text=Cover" alt=""></figure>
-            <div class="info"><span class="track">Learning to Die</span><span class="artist">Dust · 1972</span><span class="genre">Proto-Metal</span></div>
-        </li>
-        <li><figure><img src="https://via.placeholder.com/200?text=Cover" alt=""></figure>
-            <div class="info"><span class="track">Dominance and Submission</span><span class="artist">Blue Öyster Cult · 1974</span><span class="genre">Occult Rock</span></div>
-        </li>
-        <li><figure><img src="https://via.placeholder.com/200?text=Cover" alt=""></figure>
-            <div class="info"><span class="track">Never Satisfied</span><span class="artist">Judas Priest · 1974</span><span class="genre">Proto-Metal</span></div>
-        </li>
-        <li><figure><img src="https://via.placeholder.com/200?text=Cover" alt=""></figure>
-            <div class="info"><span class="track">Rock Bottom</span><span class="artist">UFO · 1974</span><span class="genre">Hard Rock</span></div>
-        </li>
-        <li><figure><img src="https://via.placeholder.com/200?text=Cover" alt=""></figure>
-            <div class="info"><span class="track">Razamanaz</span><span class="artist">Nazareth · 1973</span><span class="genre">Hard Rock</span></div>
-        </li>
-        <li><figure><img src="https://via.placeholder.com/200?text=Cover" alt=""></figure>
-            <div class="info"><span class="track">Working Man</span><span class="artist">Rush · 1974</span><span class="genre">Hard Rock</span></div>
-        </li>
-        <li><figure><img src="https://via.placeholder.com/200?text=Cover" alt=""></figure>
-            <div class="info"><span class="track">Not Fragile</span><span class="artist">Bachman-Turner Overdrive · 1974</span><span class="genre">Hard Rock</span></div>
-        </li>
-        <li><figure><img src="https://via.placeholder.com/200?text=Cover" alt=""></figure>
-            <div class="info"><span class="track">Can’t You See I’m a Star</span><span class="artist">Moxy · 1975</span><span class="genre">Hard Rock</span></div>
-        </li>
-        <li><figure><img src="https://via.placeholder.com/200?text=Cover" alt=""></figure>
-            <div class="info"><span class="track">You Just Like Me ’Cos I’m Good in Bed</span><span class="artist">Skyhooks · 1974</span><span class="genre">Glam Rock</span></div>
-        </li>
-        <li><figure><img src="https://via.placeholder.com/200?text=Cover" alt=""></figure>
-            <div class="info"><span class="track">Soul Stripper</span><span class="artist">AC/DC · 1975</span><span class="genre">Pub Rock</span></div>
-        </li>
-        <li><figure><img src="https://via.placeholder.com/200?text=Cover" alt=""></figure>
-            <div class="info"><span class="track">The Next Big Thing</span><span class="artist">The Dictators · 1975</span><span class="genre">Proto-Punk</span></div>
-        </li>
-        <li><figure><img src="https://via.placeholder.com/200?text=Cover" alt=""></figure>
-            <div class="info"><span class="track">Nobody’s Fault</span><span class="artist">Aerosmith · 1976</span><span class="genre">Hard Rock</span></div>
-        </li>
-        <li><figure><img src="https://via.placeholder.com/200?text=Cover" alt=""></figure>
-            <div class="info"><span class="track">Stone Cold Crazy</span><span class="artist">Queen · 1974</span><span class="genre">Proto-Metal</span></div>
-        </li>
-      </ul>
+    <li><figure><img src="https://via.placeholder.com/200?text=Strutter" alt="Kiss – Strutter" loading="lazy"></figure>
+        <div class="info"><span class="track">Strutter</span><span class="artist">Kiss · 1974</span><span class="genre">Glam Rock</span></div>
+    </li>
+    
+    <li><figure><img src="https://via.placeholder.com/200?text=Set+Me+Free" alt="The Sweet – Set Me Free" loading="lazy"></figure>
+        <div class="info"><span class="track">Set Me Free</span><span class="artist">The Sweet · 1974</span><span class="genre">Heavy Glam</span></div>
+    </li>
+    
+    <li><figure><img src="https://via.placeholder.com/200?text=Sunken+Rags" alt="T. Rex – Sunken Rags" loading="lazy"></figure>
+        <div class="info"><span class="track">Sunken Rags</span><span class="artist">T. Rex · 1972</span><span class="genre">Glam Rock</span></div>
+    </li>
+    
+    <li><figure><img src="https://via.placeholder.com/200?text=Them+Kinda+Monkeys+Can’t+Swing" alt="Slade – Them Kinda Monkeys Can’t Swing" loading="lazy"></figure>
+        <div class="info"><span class="track">Them Kinda Monkeys Can’t Swing</span><span class="artist">Slade · 1974</span><span class="genre">Glam Rock</span></div>
+    </li>
+    
+    <li><figure><img src="https://via.placeholder.com/200?text=Glycerine+Queen" alt="Suzi Quatro – Glycerine Queen" loading="lazy"></figure>
+        <div class="info"><span class="track">Glycerine Queen</span><span class="artist">Suzi Quatro · 1973</span><span class="genre">Glam Rock</span></div>
+    </li>
+    
+    <li><figure><img src="https://via.placeholder.com/200?text=Babylon" alt="New York Dolls – Babylon" loading="lazy"></figure>
+        <div class="info"><span class="track">Babylon</span><span class="artist">New York Dolls · 1974</span><span class="genre">Proto-Punk</span></div>
+    </li>
+    
+    <li><figure><img src="https://via.placeholder.com/200?text=Muscle+of+Love" alt="Alice Cooper – Muscle of Love" loading="lazy"></figure>
+        <div class="info"><span class="track">Muscle of Love</span><span class="artist">Alice Cooper · 1973</span><span class="genre">Sleaze Rock</span></div>
+    </li>
+    
+    <li><figure><img src="https://via.placeholder.com/200?text=The+Faith+Healer" alt="Sensational Alex Harvey Band – The Faith Healer" loading="lazy"></figure>
+        <div class="info"><span class="track">The Faith Healer</span><span class="artist">Sensational Alex Harvey Band · 1973</span><span class="genre">Theatrical Rock</span></div>
+    </li>
+    
+    <li><figure><img src="https://via.placeholder.com/200?text=Search+and+Destroy" alt="The Stooges – Search and Destroy" loading="lazy"></figure>
+        <div class="info"><span class="track">Search and Destroy</span><span class="artist">The Stooges · 1973</span><span class="genre">Proto-Punk</span></div>
+    </li>
+    
+    <li><figure><img src="https://via.placeholder.com/200?text=Sick+on+You" alt="Hollywood Brats – Sick on You" loading="lazy"></figure>
+        <div class="info"><span class="track">Sick on You</span><span class="artist">Hollywood Brats · 1973</span><span class="genre">Proto-Punk</span></div>
+    </li>
+    
+    <li><figure><img src="https://via.placeholder.com/200?text=Kings+of+the+Party" alt="Brownsville Station – Kings of the Party" loading="lazy"></figure>
+        <div class="info"><span class="track">Kings of the Party</span><span class="artist">Brownsville Station · 1974</span><span class="genre">Party Rock</span></div>
+    </li>
+    
+    <li><figure><img src="https://via.placeholder.com/200?text=Crash+Street+Kidds" alt="Mott the Hoople – Crash Street Kidds" loading="lazy"></figure>
+        <div class="info"><span class="track">Crash Street Kidds</span><span class="artist">Mott the Hoople · 1974</span><span class="genre">Sleaze Rock</span></div>
+    </li>
+    
+    <li><figure><img src="https://via.placeholder.com/200?text=Rock+Candy" alt="Montrose – Rock Candy" loading="lazy"></figure>
+        <div class="info"><span class="track">Rock Candy</span><span class="artist">Montrose · 1973</span><span class="genre">Hard Rock</span></div>
+    </li>
+    
+    <li><figure><img src="https://via.placeholder.com/200?text=Learning+to+Die" alt="Dust – Learning to Die" loading="lazy"></figure>
+        <div class="info"><span class="track">Learning to Die</span><span class="artist">Dust · 1972</span><span class="genre">Proto-Metal</span></div>
+    </li>
+    
+    <li><figure><img src="https://via.placeholder.com/200?text=Dominance+and+Submission" alt="Blue Öyster Cult – Dominance and Submission" loading="lazy"></figure>
+        <div class="info"><span class="track">Dominance and Submission</span><span class="artist">Blue Öyster Cult · 1974</span><span class="genre">Occult Rock</span></div>
+    </li>
+    
+    <li><figure><img src="https://via.placeholder.com/200?text=Never+Satisfied" alt="Judas Priest – Never Satisfied" loading="lazy"></figure>
+        <div class="info"><span class="track">Never Satisfied</span><span class="artist">Judas Priest · 1974</span><span class="genre">Proto-Metal</span></div>
+    </li>
+    
+    <li><figure><img src="https://via.placeholder.com/200?text=Rock+Bottom" alt="UFO – Rock Bottom" loading="lazy"></figure>
+        <div class="info"><span class="track">Rock Bottom</span><span class="artist">UFO · 1974</span><span class="genre">Hard Rock</span></div>
+    </li>
+    
+    <li><figure><img src="https://via.placeholder.com/200?text=Razamanaz" alt="Nazareth – Razamanaz" loading="lazy"></figure>
+        <div class="info"><span class="track">Razamanaz</span><span class="artist">Nazareth · 1973</span><span class="genre">Hard Rock</span></div>
+    </li>
+    
+    <li><figure><img src="https://via.placeholder.com/200?text=Working+Man" alt="Rush – Working Man" loading="lazy"></figure>
+        <div class="info"><span class="track">Working Man</span><span class="artist">Rush · 1974</span><span class="genre">Hard Rock</span></div>
+    </li>
+    
+    <li><figure><img src="https://via.placeholder.com/200?text=Not+Fragile" alt="Bachman-Turner Overdrive – Not Fragile" loading="lazy"></figure>
+        <div class="info"><span class="track">Not Fragile</span><span class="artist">Bachman-Turner Overdrive · 1974</span><span class="genre">Hard Rock</span></div>
+    </li>
+    
+    <li><figure><img src="https://via.placeholder.com/200?text=Can’t+You+See+I’m+a+Star" alt="Moxy – Can’t You See I’m a Star" loading="lazy"></figure>
+        <div class="info"><span class="track">Can’t You See I’m a Star</span><span class="artist">Moxy · 1975</span><span class="genre">Hard Rock</span></div>
+    </li>
+    
+    <li><figure><img src="https://via.placeholder.com/200?text=You+Just+Like+Me+’Cos+I’m+Good+in+Bed" alt="Skyhooks – You Just Like Me ’Cos I’m Good in Bed" loading="lazy"></figure>
+        <div class="info"><span class="track">You Just Like Me ’Cos I’m Good in Bed</span><span class="artist">Skyhooks · 1974</span><span class="genre">Glam Rock</span></div>
+    </li>
+    
+    <li><figure><img src="https://via.placeholder.com/200?text=Soul+Stripper" alt="AC/DC – Soul Stripper" loading="lazy"></figure>
+        <div class="info"><span class="track">Soul Stripper</span><span class="artist">AC/DC · 1975</span><span class="genre">Pub Rock</span></div>
+    </li>
+    
+    <li><figure><img src="https://via.placeholder.com/200?text=The+Next+Big+Thing" alt="The Dictators – The Next Big Thing" loading="lazy"></figure>
+        <div class="info"><span class="track">The Next Big Thing</span><span class="artist">The Dictators · 1975</span><span class="genre">Proto-Punk</span></div>
+    </li>
+    
+    <li><figure><img src="https://via.placeholder.com/200?text=Nobody’s+Fault" alt="Aerosmith – Nobody’s Fault" loading="lazy"></figure>
+        <div class="info"><span class="track">Nobody’s Fault</span><span class="artist">Aerosmith · 1976</span><span class="genre">Hard Rock</span></div>
+    </li>
+    
+    <li><figure><img src="https://via.placeholder.com/200?text=Stone+Cold+Crazy" alt="Queen – Stone Cold Crazy" loading="lazy"></figure>
+        <div class="info"><span class="track">Stone Cold Crazy</span><span class="artist">Queen · 1974</span><span class="genre">Proto-Metal</span></div>
+    </li>
+    </ul>
     </div>
 
     <h2>Show Notes</h2>
@@ -245,16 +325,11 @@
     const hero    = document.querySelector('.hero');
     const lyric   = document.querySelector('.lyric-quote');
     const bannerH = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--banner-h'));
-  
+
     window.addEventListener('scroll', () => {
       const y = Math.max(0, window.scrollY - bannerH);
-  
-      // parallax poster at 50%
       hero.style.backgroundPositionY = `-${y * 0.5}px`;
-  
-      // lyric now at 30% of scroll speed (even more lazy)
-      lyric.style.transform = 
-        `translateX(-50%) translateY(calc(-50% - ${y * 0.1}px))`;
+      lyric.style.transform = `translateX(-50%) translateY(calc(-50% - ${y * 0.1}px))`;
     });
   </script>
 </body>
